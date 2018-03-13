@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { Animated, Easing } from 'react-native';
+import {View, TouchableWithoutFeedback, Animated, Easing } from 'react-native';
 import Ripple from 'react-native-material-ripple';
 
 import { styles } from './styles';
@@ -114,17 +114,17 @@ export default class Button extends PureComponent {
     };
 
     return (
-      <Ripple
+      <TouchableWithoutFeedback
         {...props}
 
         style={[styles.container, rippleStyle, style]}
         onPress={this.onPress}
-        onPressIn={this.onPressIn}
-        onPressOut={this.onPressOut}
       >
-        {children}
-        <Animated.View style={[ styles.shade, shadeStyle ]} />
-      </Ripple>
+        <View style={[styles.container, rippleStyle, style]}>
+          {children}
+          <View style={[ styles.shade, shadeStyle ]} />
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
